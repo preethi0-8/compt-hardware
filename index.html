@@ -8,7 +8,8 @@
     <div class="container"> 
         <h1>Computer Hardware Quiz<br></h1>
          <h4>Score out of 15</h4>
-        <form>
+         <div id="timer" class="timer"></div>
+        <form id="quiz-form">
         
         <div class="Software">
             <h2>1. What is the best definition of Computer Software?</h2>
@@ -44,7 +45,7 @@
            </div>
              
         <div class="Hardware">
-            <h2>3. What is Computer Hardware??</h2>
+            <h2>3. What is the best definition of Computer Hardware??</h2>
 
 
             <input type="radio" id="ha" name="q3" value="tangible">
@@ -110,18 +111,17 @@
         <div class="CMemory">
             <h2>7. What is not computer memory?</h2>
 
-            <input type="radio" id="ca" name="q7" value="Berlin">
+            <input type="radio" id="ca" name="q7" value="both">
             <label for="ca">Stores both data and program instructions
         </label><br>
 
-            <input type="radio" id="cb" name="q7" value="Madrid">
+            <input type="radio" id="cb" name="q7" value="data">
             <label for="cb">Instructions for processing data is stored</label><br>
 
-            <input type="radio" id="cc" name="q7" value="Paris">
-            <label for="cc">Instructions for processing instructions are stored
-        </label><br>
-
-            <input type="radio" id="cd" name="q7" value="Lisbon">
+            <input type="radio" id="cc" name="q7" value="instructions">
+            <label for="cc">Instructions for processing instructions</label><br>
+            
+            <input type="radio" id="cd" name="q7" value="space">
             <label for="cd">Storage space in computer where data is processed</label>
            </div>
         <div class="System">
@@ -237,7 +237,7 @@
             <input type="radio" id="td" name="q14" value="life">
             <label for="td">to extend its life</label>
            </div>
-        div class="CPU">
+        <div class="CPU">
             <h2>15. What does CPU stand for?</h2>
 
 
@@ -254,9 +254,10 @@
             <label for="pd">Central Processing Unit<br><br></label>
            </div>
 
-           <button type="submit">Submit</button>
+           <button type="submit" name="submit">Submit</button>
         </form>
-        <script src="script.js"></script>
+        <div id="result"></div>
     </div>
+    <script src="script.js"></script>
     </body>
 </html>
