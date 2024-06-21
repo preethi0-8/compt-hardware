@@ -20,9 +20,11 @@ let startTime;
 let formSubmitted = false;
 
 window.onload = function() {
-    startTime = Date.now(); // Capture start time
-    let timeLeft = 600; // 10 minutes in seconds
+    console.log('Window loaded'); 
+    startTime = Date.now(); 
+    let timeLeft = 600; 
     const timerDisplay = document.getElementById('timer');
+    console.log(timerDisplay); 
     const quizForm = document.getElementById('quiz-form');
     const resultsContainer = document.getElementById('results-container');
 
