@@ -20,11 +20,11 @@ let startTime;
 let formSubmitted = false;
 
 window.onload = function() {
-    startTime = Date.now(); 
-    let timeLeft = 10; 
+    startTime = Date.now(); // Capture start time
+    let timeLeft = 600; // 10 minutes in seconds
     const timerDisplay = document.getElementById('timer');
     const quizForm = document.getElementById('quiz-form');
-    const resultsContainer = document.getElementById('results-container'); 
+    const resultsContainer = document.getElementById('results-container');
 
     if (!timerDisplay) {
         console.error('Timer element with id "timer" not found.');
@@ -35,9 +35,9 @@ window.onload = function() {
         if (timeLeft <= 0 && !formSubmitted) {
             stopTimer();
             alert('Time is up! Submitting the quiz.');
-            quizForm.submit(); 
-            formSubmitted = true; 
-            disableRadioInputs(); 
+            quizForm.submit();
+            formSubmitted = true;
+            disableRadioInputs();
         } else {
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
@@ -52,13 +52,13 @@ window.onload = function() {
 
     quizForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        if (formSubmitted) return; /
+        if (formSubmitted) return;
         const endTime = Date.now();
-        const timeTaken = Math.floor((endTime - startTime) / 1000); 
+        const timeTaken = Math.floor((endTime - startTime) / 1000);
         stopTimer();
         checkAnswers(timeTaken);
-        disableRadioInputs(); 
-        formSubmitted = true; 
+        disableRadioInputs();
+        formSubmitted = true;
         showResultsPage();
     });
 
@@ -98,7 +98,7 @@ window.onload = function() {
             `;
         });
 
-        resultsContainer.innerHTML = ''; 
+        resultsContainer.innerHTML = '';
         resultsContainer.appendChild(resultContainer);
     }
 
