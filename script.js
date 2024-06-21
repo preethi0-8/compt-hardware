@@ -19,7 +19,7 @@ let startTime;
 
 window.onload = function() {
     startTime = Date.now(); // Capture start time
-    let timeLeft = 600; // 10 minutes in seconds
+    let timeLeft = 10; // 10 minutes in seconds
     const timerDisplay = document.getElementById('timer');
     //const submitButton = document.getElementById('submitButton');
 

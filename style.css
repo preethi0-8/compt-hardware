@@ -7,7 +7,7 @@ body {
     background-color: #ffffff;
     border: 1px solid #b8baea;
     padding: 40px;
-    width: 100%
+    width: 100%;
     max-width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px;
@@ -57,7 +57,7 @@ button:hover {
 
 label {
     margin: 10px 0;
-    color: ##060b3a;
+    color: #060b3a;
 }
 
 .result-question {
@@ -75,5 +75,5 @@ label {
 
 .result-question p {
     margin: 5px 0;
-    color: ##060b3a;
+    color: #060b3a;
 }
