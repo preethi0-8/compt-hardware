@@ -20,13 +20,10 @@ let startTime;
 let formSubmitted = false;
 
 window.onload = function() {
-    console.log('Window loaded'); 
     startTime = Date.now(); 
-    let timeLeft = 600; 
+    let timeLeft = 600;
     const timerDisplay = document.getElementById('timer');
-    console.log(timerDisplay); 
     const quizForm = document.getElementById('quiz-form');
-    const resultsContainer = document.getElementById('results-container');
 
     if (!timerDisplay) {
         console.error('Timer element with id "timer" not found.');
@@ -37,9 +34,9 @@ window.onload = function() {
         if (timeLeft <= 0 && !formSubmitted) {
             stopTimer();
             alert('Time is up! Submitting the quiz.');
-            quizForm.submit();
-            formSubmitted = true;
-            disableRadioInputs();
+            quizForm.submit(); 
+            formSubmitted = true; 
+            disableRadioInputs(); 
         } else {
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
@@ -54,69 +51,60 @@ window.onload = function() {
 
     quizForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        if (formSubmitted) return;
+        if (formSubmitted) return; 
         const endTime = Date.now();
-        const timeTaken = Math.floor((endTime - startTime) / 1000);
+        const timeTaken = Math.floor((endTime - startTime) / 1000); 
         stopTimer();
         checkAnswers(timeTaken);
         disableRadioInputs();
-        formSubmitted = true;
-        showResultsPage();
+        formSubmitted = true; 
     });
-
-    function checkAnswers(timeTaken) {
-        let score = 0;
-        const form = document.getElementById('quiz-form');
-        const formData = new FormData(form);
-        const userAnswers = {};
-
-        for (let [question, answer] of formData.entries()) {
-            userAnswers[question] = answer;
-            if (answers[question] === answer) {
-                score++;
-            }
-        }
-
-        showResults(userAnswers, score, timeTaken);
-    }
-
-    function showResults(userAnswers, score, timeTaken) {
-        const resultContainer = document.createElement('div');
-        resultContainer.innerHTML = `<h2>Your score is ${score} out of 15 = ${(score * 100 / 15).toFixed(2)}%</h2>`;
-
-        const minutes = Math.floor(timeTaken / 60);
-        const seconds = timeTaken % 60;
-        resultContainer.innerHTML += `<p>Time taken: ${formatTime(minutes)}:${formatTime(seconds)}</p>`;
-        const questions = Object.keys(answers);
-        questions.forEach((question, index) => {
-            const userAnswer = userAnswers[question] || 'No answer';
-            const correctAnswer = answers[question];
-            resultContainer.innerHTML += `
-                <div class="result-question">
-                    <h3>Question ${index + 1}</h3>
-                    <p>Your answer: ${userAnswer}</p>
-                    <p>Correct answer: ${correctAnswer}</p>
-                </div>
-            `;
-        });
-
-        resultsContainer.innerHTML = '';
-        resultsContainer.appendChild(resultContainer);
-    }
-
-    function disableRadioInputs() {
-        const radioInputs = document.querySelectorAll('input[type="radio"]');
-        radioInputs.forEach(input => {
-            input.disabled = true;
-        });
-    }
-
-    function formatTime(time) {
-        return time < 10 ? `0${time}` : time;
-    }
-
-    function showResultsPage() {
-        quizForm.style.display = 'none';
-        resultsContainer.style.display = 'block';
-    }
 };
+
+function checkAnswers(timeTaken) {
+    let score = 0;
+    const form = document.getElementById('quiz-form');
+    const formData = new FormData(form);
+    const userAnswers = {};
+
+    for (let [question, answer] of formData.entries()) {
+        userAnswers[question] = answer;
+        if (answers[question] === answer) {
+            score++;
+        }
+    }
+
+    showResults(userAnswers, score, timeTaken);
+}
+
+function showResults(userAnswers, score, timeTaken) {
+    const resultContainer = document.getElementById('result');
+    resultContainer.innerHTML = `<h2>Your score is ${score} out of 15 = ${(score * 100 / 15).toFixed(2)}%</h2>`;
+
+    const minutes = Math.floor(timeTaken / 60);
+    const seconds = timeTaken % 60;
+    resultContainer.innerHTML += `<p>Time taken: ${formatTime(minutes)}:${formatTime(seconds)}</p>`;
+    const questions = Object.keys(answers);
+    questions.forEach((question, index) => {
+        const userAnswer = userAnswers[question] || 'No answer';
+        const correctAnswer = answers[question];
+        resultContainer.innerHTML += `
+            <div class="result-question">
+                <h3>Question ${index + 1}</h3>
+                <p>Your answer: ${userAnswer}</p>
+                <p>Correct answer: ${correctAnswer}</p>
+            </div>
+        `;
+    });
+}
+
+function disableRadioInputs() {
+    const radioInputs = document.querySelectorAll('input[type="radio"]');
+    radioInputs.forEach(input => {
+        input.disabled = true;
+    });
+}
+
+function formatTime(time) {
+    return time < 10 ? `0${time}` : time;
+}
