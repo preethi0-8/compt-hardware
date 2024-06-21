@@ -14,15 +14,16 @@ const answers = {
     q13: 'Change voltage to match another device',
     q14: 'disperse a mix of antifreeze and water',
     q15: 'Central Processing Unit'
-}
+};
+
 let startTime;
+let formSubmitted = false;
 
 window.onload = function() {
     startTime = Date.now(); // Capture start time
     let timeLeft = 10; // 10 minutes in seconds
     const timerDisplay = document.getElementById('timer');
-    //const submitButton = document.getElementById('submitButton');
-
+    const quizForm = document.getElementById('quiz-form');
 
     if (!timerDisplay) {
         console.error('Timer element with id "timer" not found.');
@@ -31,13 +32,10 @@ window.onload = function() {
 
     const timerInterval = setInterval(function() {
         if (timeLeft <= 0) {
-            //clearInterval(timerInterval); Venu commented
-            stopTimer()
-            alert('Time is up! Submitting the quiz.');      
-            //form.submit(); // Auto-submit the form
-            //onsubmit="stopTimer(); return false;"      
-            document.querySelector('quiz-form').submit(); 
-            checkAnswers(timeTaken);
+            stopTimer();
+            alert('Time is up! Submitting the quiz.');
+            quizForm.submit(); // Auto-submit the form
+            checkAnswers(timeLeft);
         } else {
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
@@ -50,19 +48,15 @@ window.onload = function() {
         clearInterval(timerInterval);
     }
 
-    function formatTime(time) {
-        return time < 10 ? `0${time}` : time;
-    }
-    //submitButton.addEventListener('submit', () => {stopTimer()});
-
-    document.getElementById('quiz-form').addEventListener('submit', function(event) {
-        //submitButton.addEventListener('submit', function(event) {
+    quizForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        //submitButton.preventDefault()
+        if (formSubmitted) return; // Prevent multiple submissions
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000); // Time taken in seconds
         stopTimer();
         checkAnswers(timeTaken);
+        disableRadioInputs(); // Disable radio inputs after submission
+        formSubmitted = true; // Set flag to true after submission
     });
 };
 
@@ -100,6 +94,13 @@ function showResults(userAnswers, score, timeTaken) {
                 <p>Correct answer: ${correctAnswer}</p>
             </div>
         `;
+    });
+}
+
+function disableRadioInputs() {
+    const radioInputs = document.querySelectorAll('input[type="radio"]');
+    radioInputs.forEach(input => {
+        input.disabled = true;
     });
 }
 

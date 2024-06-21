@@ -10,7 +10,6 @@ body {
     width: 100%;
     max-width: 1000px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
 }
 
 h1, h4 {
@@ -46,4 +45,42 @@ button {
     padding: 15px 20px;
     margin: 20px 0;
     border: none;
+    border-radius: 5px; /* Added border-radius for button */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4566a0;
+}
+
+.result-container {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-container h2 {
+    color: #ffffff; /* Dark blue text color */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.result-question {
+    background-color: #cbdaec;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #b8baea;
+}
+
+.result-question h3 {
+    color: 151d71; /* Dark blue text color for question headings */
+    margin-top: 0;
+}
+
+.result-question p {
+    color: 151d71; /* Dark text color */
+    margin: 5px 0;
 }
